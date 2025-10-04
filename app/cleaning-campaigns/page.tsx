@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -19,7 +20,7 @@ interface Campaign {
 const campaigns: Campaign[] = [
   {
     id: "yangtze",
-    name: "Yangtze River Cleanup",
+    name: "Yangtze Cleanup",
     location: "Yangtze River, China",
     description: "Join us in cleaning the longest river in Asia and protecting its diverse ecosystem.",
     image: "/yangtze-river-cleanup.jpg",
@@ -27,7 +28,7 @@ const campaigns: Campaign[] = [
   },
   {
     id: "nile",
-    name: "Nile River Initiative",
+    name: "Nile Initiative",
     location: "Nile River, Egypt",
     description: "Help preserve the historic Nile River by removing plastic waste and debris.",
     image: "/nile-river-cleanup.jpg",
@@ -35,7 +36,7 @@ const campaigns: Campaign[] = [
   },
   {
     id: "amazon",
-    name: "Amazon River Project",
+    name: "Amazon Project",
     location: "Amazon River, Brazil",
     description: "Protect the Amazon's waterways and support local communities in conservation efforts.",
     image: "/amazon-river-cleanup.jpg",
@@ -51,7 +52,7 @@ const campaigns: Campaign[] = [
   },
   {
     id: "mississippi",
-    name: "Mississippi River Care",
+    name: "Mississippi Care",
     location: "Mississippi River, USA",
     description: "Join volunteers in keeping North America's mighty river clean and healthy.",
     image: "/mississippi-river-cleanup.jpg",
@@ -60,11 +61,17 @@ const campaigns: Campaign[] = [
 ]
 
 export default function CleaningCampaignsPage() {
+  const router = useRouter()
   const stickersRef = useRef<HTMLDivElement>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(campaigns.length)
+  const [isTransitioning, setIsTransitioning] = useState(true)
   const cardsPerView = 3
 
   const infiniteCampaigns = [...campaigns, ...campaigns, ...campaigns]
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }, [])
 
   useEffect(() => {
     const stickers = stickersRef.current?.querySelectorAll(".sticker")
@@ -85,38 +92,57 @@ export default function CleaningCampaignsPage() {
   }, [])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => {
-      const next = prev + 1
-      // Reset to middle section when reaching end
-      if (next >= campaigns.length * 2) {
-        return campaigns.length
-      }
-      return next
-    })
+    setCurrentSlide((prev) => prev + 1)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => {
-      const previous = prev - 1
-      // Reset to middle section when reaching start
-      if (previous < campaigns.length) {
-        return campaigns.length * 2 - 1
-      }
-      return previous
-    })
+    setCurrentSlide((prev) => prev - 1)
   }
 
   useEffect(() => {
-    setCurrentSlide(campaigns.length)
-  }, [])
+    if (currentSlide >= campaigns.length * 2) {
+      setTimeout(() => {
+        setIsTransitioning(false)
+        setCurrentSlide(campaigns.length)
+      }, 500)
+      setTimeout(() => {
+        setIsTransitioning(true)
+      }, 550)
+    } else if (currentSlide < campaigns.length) {
+      setTimeout(() => {
+        setIsTransitioning(false)
+        setCurrentSlide(campaigns.length * 2 - 1)
+      }, 500)
+      setTimeout(() => {
+        setIsTransitioning(true)
+      }, 550)
+    }
+  }, [currentSlide])
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide()
-    }, 3000) // Changed from 1000ms to 3000ms (3 seconds)
+    }, 3000)
 
     return () => clearInterval(interval)
   }, [])
+
+  const scrollToCampaigns = () => {
+    const campaignsSection = document.getElementById("campaigns-section")
+    if (campaignsSection) {
+      campaignsSection.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
+  const navigateToTakeAction = () => {
+    router.push("/")
+    setTimeout(() => {
+      const takeActionSection = document.getElementById("take-action")
+      if (takeActionSection) {
+        takeActionSection.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }, 100)
+  }
 
   return (
     <main className="min-h-screen bg-[#0a1628]">
@@ -170,7 +196,10 @@ export default function CleaningCampaignsPage() {
             </div>
             <div className="flex flex-col items-center">
               <p className="text-center text-gray-200 mb-4">Join thousands of volunteers making a difference!</p>
-              <Button className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-6 text-lg rounded-full shadow-lg">
+              <Button
+                onClick={scrollToCampaigns}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-6 text-lg rounded-full shadow-lg"
+              >
                 Start Your Journey
               </Button>
             </div>
@@ -179,7 +208,7 @@ export default function CleaningCampaignsPage() {
       </section>
 
       {/* Campaigns Section */}
-      <section className="py-16 px-4">
+      <section id="campaigns-section" className="py-16 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">Pick a Campaign, Make an Impact!</h2>
@@ -199,7 +228,7 @@ export default function CleaningCampaignsPage() {
             {/* Campaigns Container */}
             <div className="overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-in-out gap-6"
+                className={`flex gap-6 ${isTransitioning ? "transition-transform duration-500 ease-in-out" : ""}`}
                 style={{
                   transform: `translateX(-${(currentSlide * 100) / cardsPerView}%)`,
                 }}
@@ -254,11 +283,12 @@ export default function CleaningCampaignsPage() {
           <p className="text-xl text-white/90 mb-8 leading-relaxed">
             Join our community of river heroes and be part of the solution. Every cleanup makes a difference!
           </p>
-          <Link href="/">
-            <Button className="bg-white text-cyan-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-full shadow-lg">
-              Explore More Ways to Help
-            </Button>
-          </Link>
+          <Button
+            onClick={navigateToTakeAction}
+            className="bg-white text-cyan-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-full shadow-lg"
+          >
+            Explore More Ways to Help
+          </Button>
         </div>
       </section>
     </main>
