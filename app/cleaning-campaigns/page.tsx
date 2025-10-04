@@ -38,7 +38,7 @@ const campaigns: Campaign[] = [
     id: "amazon",
     name: "Amazon Project",
     location: "Amazon River, Brazil",
-    description: "Protect the Amazon's waterways and support local communities in conservation efforts.",
+    description: "Protect the waterways and support local communities in conservation efforts.",
     image: "/amazon-river-cleanup.jpg",
     date: "Quarterly Campaigns",
   },
@@ -185,7 +185,7 @@ export default function CleaningCampaignsPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-2xl font-semibold text-cyan-400 mb-4 italic">
+              <p className="text-2xl font-semibold text-cyan-400 mb-4 italic tracking-wide">
                 "Before we explore solutions, let's understand the challenge we're facing together!"
               </p>
               <p className="text-lg text-gray-200 leading-relaxed">
