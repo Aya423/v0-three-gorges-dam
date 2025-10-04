@@ -303,29 +303,25 @@ export default function Home() {
               </h2>
               <div className="grid md:grid-cols-3 gap-8 md:gap-12" style={{ perspective: "1200px" }}>
                 <div
-                  className="rounded-[2.5rem] p-[2px] transition-all duration-500 hover:scale-105 hover:-translate-y-4"
+                  className="rounded-[2.5rem] p-[2px] transition-all duration-500"
                   style={{
                     background: "linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(147, 51, 234, 0.5))",
-                    transform: "rotateY(15deg) rotateX(5deg) translateZ(-20px)",
                     transformStyle: "preserve-3d",
-                    boxShadow:
-                      "-20px 30px 60px rgba(0, 0, 0, 0.3), -10px 15px 30px rgba(0, 0, 0, 0.2), inset 5px 5px 15px rgba(255, 255, 255, 0.05)",
-                    animation: "float 6s ease-in-out infinite",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "rotateY(0deg) rotateX(0deg) translateZ(30px)"
+                    e.currentTarget.style.transform = "scale(1.05) translateY(-16px)"
                     e.currentTarget.style.boxShadow = "0 40px 80px rgba(0, 0, 0, 0.4), 0 20px 40px rgba(0, 0, 0, 0.3)"
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "rotateY(15deg) rotateX(5deg) translateZ(-20px)"
-                    e.currentTarget.style.boxShadow =
-                      "-20px 30px 60px rgba(0, 0, 0, 0.3), -10px 15px 30px rgba(0, 0, 0, 0.2), inset 5px 5px 15px rgba(255, 255, 255, 0.05)"
+                    e.currentTarget.style.transform = ""
+                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.2)"
                   }}
                 >
                   <div className="flex flex-col items-center text-center p-8 rounded-[2.5rem] backdrop-blur-md bg-background/80 relative overflow-hidden group h-full">
-                    <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                      <img src="/lake-scene.jpg" alt="" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/60 to-accent/60" />
+                    <div className="absolute inset-0 z-0 opacity-30 group-hover:opacity-40 transition-opacity">
+                      <img src="/daily-routine.jpg" alt="" className="w-full h-full object-cover blur-sm scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40" />
                     </div>
                     <div
                       className="absolute inset-0 bg-gradient-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700 opacity-0 group-hover:opacity-100"
@@ -352,13 +348,12 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+
                 <div
-                  className="rounded-[2.5rem] p-[2px] transition-all duration-500 hover:scale-105 hover:-translate-y-4"
+                  className="rounded-[2.5rem] p-[2px] transition-all duration-500"
                   style={{
                     background: "linear-gradient(135deg, rgba(16, 185, 129, 0.5), rgba(59, 130, 246, 0.5))",
-                    boxShadow:
-                      "0 35px 70px rgba(0, 0, 0, 0.35), 0 18px 35px rgba(0, 0, 0, 0.25), inset 0 5px 15px rgba(255, 255, 255, 0.05)",
-                    animation: "float 6s ease-in-out infinite 0.5s",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.05) translateY(-16px)"
@@ -366,14 +361,13 @@ export default function Home() {
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = ""
-                    e.currentTarget.style.boxShadow =
-                      "0 35px 70px rgba(0, 0, 0, 0.35), 0 18px 35px rgba(0, 0, 0, 0.25), inset 0 5px 15px rgba(255, 255, 255, 0.05)"
+                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.2)"
                   }}
                 >
                   <div className="flex flex-col items-center text-center p-8 rounded-[2.5rem] backdrop-blur-md bg-background/80 relative overflow-hidden group h-full">
-                    <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                      <img src="/river-sunset.jpg" alt="" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-accent/60 to-primary/60" />
+                    <div className="absolute inset-0 z-0 opacity-30 group-hover:opacity-40 transition-opacity">
+                      <img src="/student-icon.jpg" alt="" className="w-full h-full object-cover blur-sm scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent/40 to-primary/40" />
                     </div>
                     <div
                       className="absolute inset-0 bg-gradient-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700 opacity-0 group-hover:opacity-100"
@@ -399,30 +393,31 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+
                 <div
-                  className="rounded-[2.5rem] p-[2px] transition-all duration-500 hover:scale-105 hover:-translate-y-4"
+                  className="rounded-[2.5rem] p-[2px] transition-all duration-500"
                   style={{
                     background: "linear-gradient(135deg, rgba(245, 158, 11, 0.5), rgba(16, 185, 129, 0.5))",
-                    transform: "rotateY(-15deg) rotateX(5deg) translateZ(-20px)",
                     transformStyle: "preserve-3d",
-                    boxShadow:
-                      "20px 30px 60px rgba(0, 0, 0, 0.3), 10px 15px 30px rgba(0, 0, 0, 0.2), inset -5px 5px 15px rgba(255, 255, 255, 0.05)",
-                    animation: "float 6s ease-in-out infinite 1s",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "rotateY(0deg) rotateX(0deg) translateZ(30px)"
+                    e.currentTarget.style.transform = "scale(1.05) translateY(-16px)"
                     e.currentTarget.style.boxShadow = "0 40px 80px rgba(0, 0, 0, 0.4), 0 20px 40px rgba(0, 0, 0, 0.3)"
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "rotateY(-15deg) rotateX(5deg) translateZ(-20px)"
-                    e.currentTarget.style.boxShadow =
-                      "20px 30px 60px rgba(0, 0, 0, 0.3), 10px 15px 30px rgba(0, 0, 0, 0.2), inset -5px 5px 15px rgba(255, 255, 255, 0.05)"
+                    e.currentTarget.style.transform = ""
+                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.2)"
                   }}
                 >
                   <div className="flex flex-col items-center text-center p-8 rounded-[2.5rem] backdrop-blur-md bg-background/80 relative overflow-hidden group h-full">
-                    <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                      <img src="/lake-scene.jpg" alt="" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-500/60 to-blue-500/60" />
+                    <div className="absolute inset-0 z-0 opacity-30 group-hover:opacity-40 transition-opacity">
+                      <img
+                        src="/farmer-tractor-field.jpg"
+                        alt=""
+                        className="w-full h-full object-cover blur-sm scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-500/40 to-blue-500/40" />
                     </div>
                     <div
                       className="absolute inset-0 bg-gradient-to-br from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700 opacity-0 group-hover:opacity-100"

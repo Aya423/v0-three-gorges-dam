@@ -193,10 +193,10 @@ export default function YangtzePage() {
       <section className="container mx-auto max-w-7xl px-6 pb-16 pt-8">
         <h2 className="font-oswald text-5xl font-bold text-center mb-12 text-foreground uppercase">FIRES</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-          {/* خريطة الحرائق على اليسار */}
+        <div className="flex flex-col gap-12">
+          {/* خريطة الحرائق في الأعلى */}
           <div
-            className="border-8 border-yellow-400 rounded-lg shadow-xl p-2 bg-yellow-50 flex w-full overflow-hidden cursor-pointer"
+            className="rounded-lg shadow-xl overflow-hidden cursor-pointer"
             style={{
               transform: hoveredBox === "firesImage" ? "translateZ(30px) scale(1.02)" : "translateZ(0) scale(1)",
               boxShadow:
@@ -209,12 +209,25 @@ export default function YangtzePage() {
             onMouseEnter={() => setHoveredBox("firesImage")}
             onMouseLeave={() => setHoveredBox(null)}
           >
-            {/* overlay لجعل النص واضح */}
+            <img
+              src="/images/yangtze-fires-river.jpg"
+              alt="Satellite view of fire hotspots in the Yangtze River delta region"
+              className="w-full h-auto rounded object-contain"
+            />
+          </div>
+
+          {/* النص في الأسفل مع خلفية fire-background.jpg */}
+          <div
+            className="p-8 rounded-md bg-cover bg-center relative overflow-hidden"
+            style={{
+              backgroundImage: "url('/images/fire-background.jpg')",
+            }}
+          >
             <div className="absolute inset-0 bg-black/70"></div>
 
             <div className="relative z-10">
               <p className="text-white font-merri tracking-wide leading-relaxed">
-                On May 6, 2004, NASA’s Terra satellite (MODIS sensor) spotted dozens of fires near the mouth of the
+                On May 6, 2004, NASA's Terra satellite (MODIS sensor) spotted dozens of fires near the mouth of the
                 Yangtze River in eastern China. In the image, the fires appear as red dots. The large lake on the left
                 is Tai Lake, and to the east is the gray area of Shanghai city.
               </p>
@@ -224,14 +237,6 @@ export default function YangtzePage() {
                 climate, air quality, and natural resources.
               </p>
             </div>
-          </div>
-
-          <div className="border-8 border-yellow-400 rounded-lg shadow-xl p-2 bg-yellow-50 flex w-full min-h-[400px]">
-            <img
-              src="/images/yangtze-fires-river.jpg"
-              alt="Satellite view of fire hotspots in the Yangtze River delta region"
-              className="w-full h-full rounded object-cover"
-            />
           </div>
         </div>
 
